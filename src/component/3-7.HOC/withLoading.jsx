@@ -6,8 +6,10 @@ export default function withLoading(Component) {
 
     useEffect(() => {
       const timer = setTimeout(() => setLoading(false), 3000);
+
+      return () => clearTimeout(timer);
     }, []);
     return loading ? <p>Loading...</p> : <Component {...props} />;
   };
-  return <WithLoadingComponent />;
+  return WithLoadingComponent;
 }

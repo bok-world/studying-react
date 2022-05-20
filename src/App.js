@@ -18,6 +18,8 @@ import "./App.css";
 // import Button from "./component/3-7.HOC/Button";
 // import Input from "./component/3-7.HOC/input";
 import Memo from "./component/3-8.Memoization/Memo";
+// import Example from "./component/3-11.Portal/Example";
+// import Component from "./component/3-13.PropTypes/Component";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
       {/* <Button /> */}
       {/* <Input /> */}
       <Memo />
+      {/* <Example /> */}
+      {/* <Component /> */}
     </div>
   );
 }

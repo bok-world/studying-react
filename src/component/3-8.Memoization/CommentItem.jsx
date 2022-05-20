@@ -1,12 +1,42 @@
-import React from "react";
-import "./CommentItme.css";
+import React, { Profiler, memo, useState, useMemo } from "react";
+import "./CommentItem.css";
 
-export default function CommentItem(title, content, likes) {
+function CommentItem({ title, content, likes, onClick }) {
+  const [clickCount, setClickCount] = useState(0);
+  function onRenderCallback(
+    id,
+    phase,
+    actualDuration,
+    baseDuration,
+    startTime,
+    commitTime,
+    interactions
+  ) {
+    console.log(`actualDuration(${title}):${actualDuration}`);
+  }
+  const handleClick = () => {
+    onClick();
+    setClickCount((prev) => prev + 1);
+    alert(`${title} 눌림`);
+  };
+  const rate = useMemo(() => {
+    return likes > 10 ? "Good" : "Bad";
+  }, [likes]);
   return (
-    <div classsName="CommentItem">
-      <span>{title}</span>
-      <span>{content}</span>
-      <span>{likes}</span>
-    </div>
+    <Profiler id="CommentItem" onRender={onRenderCallback}>
+      <div className="commentItem" onClick={handleClick}>
+        <span>{title}</span>
+        <br />
+        <span>{content}</span>
+        <br />
+        <span>{likes}</span>
+        <br />
+        <span>{rate}</span>
+        <br />
+        <span>{clickCount}</span>
+      </div>
+    </Profiler>
   );
 }
+
+export default memo(CommentItem);
